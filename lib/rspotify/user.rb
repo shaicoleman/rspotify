@@ -61,6 +61,8 @@ module RSpotify
     private_class_method :extract_custom_headers
 
     def self.oauth_header(user_id)
+      # workaround for rspotify 2.12.0 when calling playlist.add_tracks!
+      user_id = @@users_credentials.keys.first
       {
         'Authorization' => "Bearer #{@@users_credentials[user_id]['token']}",
         'Content-Type'  => 'application/json'
